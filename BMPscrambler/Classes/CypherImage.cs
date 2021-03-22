@@ -27,7 +27,5 @@
             byte[] arr = bmpConvert.Bitmap2Array(image);             
             return bmpConvert.Array2Bitmap(arr);
         }
-    }
-
-    
+    }    
 }

@@ -4,14 +4,13 @@
     {
         public double H { get; }
         public double Hmax { get; }
+        public double Size { get; }
         public System.Drawing.Bitmap Image { get; }
-
-        readonly private System.Collections.Generic.IDictionary<int, double> counts;
 
         public ImageInfo(System.Drawing.Bitmap image)
         {
-            this.Image = image;
-            counts = new System.Collections.Generic.Dictionary<int, double>();
+            Image = image;
+            Size = image.Width * image.Height;
             Hmax = GetHmax();
             H = GetH();            
         }
@@ -23,8 +22,9 @@
 
         private double GetH()
         {
+            System.Collections.Generic.IDictionary<int, double> counts = new System.Collections.Generic.Dictionary<int, double>();
             double I = 0;            
-            for (int i = 0; i < Image.Width * Image.Height; i++)
+            for (int i = 0; i < Size; i++)
             {
                 System.Drawing.Color c = Image.GetPixel(i % Image.Width, i / Image.Width);
                 if (!counts.ContainsKey(c.ToArgb()))
@@ -33,7 +33,7 @@
                     counts[c.ToArgb()]++;
             }
             foreach (int x in counts.Keys)
-                I += (double)(counts[x] / (Image.Width * Image.Height)) * System.Math.Log(Image.Width * Image.Height / counts[x], 2);
+                I += (double)(counts[x] / Size) * System.Math.Log(Size / counts[x], 2);
             return I;
         }
     }
