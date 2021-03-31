@@ -1,19 +1,26 @@
-﻿namespace BMPscrambler.Classes
+﻿using System.Collections.Generic;
+using System.Drawing;
+
+namespace BMPscrambler.Classes
 {
     class ImageInfo
     {
         public double H { get; }
         public double Hmax { get; }
         public double Size { get; }
-        public System.Drawing.Bitmap Image { get; }
+        public Bitmap Image { get; }
+        public IDictionary<Color, int> counts;
 
-        public ImageInfo(System.Drawing.Bitmap image)
+        public ImageInfo(Bitmap image)
         {
             Image = image;
             Size = image.Width * image.Height;
+            ColorCount();
             Hmax = GetHmax();
             H = GetH();            
         }
+
+        ~ImageInfo() { }
 
         private double GetHmax()
         {
@@ -22,19 +29,21 @@
 
         private double GetH()
         {
-            System.Collections.Generic.IDictionary<int, double> counts = new System.Collections.Generic.Dictionary<int, double>();
-            double I = 0;            
+            double I = 0;
+            foreach (Color x in counts.Keys)
+                I += counts[x] / Size * System.Math.Log(Size / counts[x], 2);
+            return I;
+        }
+
+        private void ColorCount()
+        {
+            counts = new Dictionary<Color, int>();
             for (int i = 0; i < Size; i++)
             {
-                System.Drawing.Color c = Image.GetPixel(i % Image.Width, i / Image.Width);
-                if (!counts.ContainsKey(c.ToArgb()))
-                    counts.Add(c.ToArgb(), 1);
-                else
-                    counts[c.ToArgb()]++;
+                Color c = Image.GetPixel(i % Image.Width, i / Image.Width);
+                if (!counts.ContainsKey(c)) counts.Add(c, 1);
+                else counts[c]++;
             }
-            foreach (int x in counts.Keys)
-                I += (double)(counts[x] / Size) * System.Math.Log(Size / counts[x], 2);
-            return I;
         }
     }
 }

@@ -9,3 +9,6 @@ E:\projects\BMPscrambler\BMPscrambler\obj\Debug\BMPscrambler.exe
 E:\projects\BMPscrambler\BMPscrambler\obj\Debug\BMPscrambler.pdb
 E:\projects\BMPscrambler\BMPscrambler\obj\Debug\BMPscrambler.Form1.resources
 E:\projects\BMPscrambler\BMPscrambler\obj\Debug\BMPscrambler.g.resources
+E:\projects\BMPscrambler\BMPscrambler\bin\Debug\System.Numerics.Vectors.dll
+E:\projects\BMPscrambler\BMPscrambler\bin\Debug\System.Numerics.Vectors.xml
+E:\projects\BMPscrambler\BMPscrambler\obj\Debug\BMPscrambler.csproj.CopyComplete
