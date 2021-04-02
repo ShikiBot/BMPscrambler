@@ -57,6 +57,7 @@
     <Compile Include="Classes\ImageInfo.cs" />
     <Compile Include="Classes\KeyType.cs" />
     <Compile Include="Classes\Matrix.cs" />
+    <Compile Include="Classes\SinglePermutation.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
