@@ -27,16 +27,16 @@ namespace BMPscrambler.Classes
             return Cimage;
         }
 
-        public int[] genKey(int count)
+        public int[] GenKey(int count)
         {
             int[] key = new int[count];
             for (int i = 0; i < count; i++)
                 key[i] = i;
-            key = shuffle(key);
+            key = Shuffle(key);
             return key;
         }
 
-        private int[] shuffle(int[] array)
+        private int[] Shuffle(int[] array)
         {
             Random rng = new Random();
             int n = array.Length;

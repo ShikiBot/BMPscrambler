@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using BMPscrambler.Classes;
 using System.Linq;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
 
 namespace BMPscrambler
 {
@@ -23,14 +24,21 @@ namespace BMPscrambler
         public Form1()
         {
             InitializeComponent();
-            cImage = new CypherImage();
-            originalImage = new ImageInfo(Properties.Resources.GokuSSBlue);
-            cypheredImage = new ImageInfo(Properties.Resources.GokuSSBlue);            
-        }        
-
+            cImage = new CypherImage();            
+            Bitmap bitmap = Properties.Resources._21.Clone(new Rectangle(0, 0, 100, 100), PixelFormat.Format8bppIndexed); // Properties.Resources._21 - bitmap картинки в argb
+            ColorPalette palette = new Bitmap(100, 100, PixelFormat.Format8bppIndexed).Palette; // палитра у Properties.Resources._21 не полная => нужно зафиксить
+            palette.Entries[0] = Color.FromArgb(0, 0, 0, 0); // изначально после конвертации 32bpp в 8bpp палитра не содержит прозрачного цвета, добавляем
+            for (int i = 1; i < 255; i++) // производится добор палитры до 256 цветов
+                palette.Entries[i] = i < bitmap.Palette.Entries.Length ? bitmap.Palette.Entries[i] : Color.FromArgb(i, i, i);
+            bitmap.Palette = palette; //замена поломаной палитры на зафикшеную
+            originalImage = new ImageInfo(bitmap);
+            cypheredImage = new ImageInfo(bitmap);
+        }
+        
         private void Form1_Load(object sender, EventArgs e)
         {
             //MessageBox.Show(originalImage.Hmax + "     " + originalImage.H + "\n" + cypheredImage.Hmax + "     " + cypheredImage.H);
+            pictureBox1.Image = originalImage.Image;
             label1.Text = cypheredImage.H + " " + k;
             pictureBox2.Image = cypheredImage.Image;
         }
@@ -45,10 +53,16 @@ namespace BMPscrambler
             cim = hillCipher.Encrypt(mess, ekey, k, abc);
             cypheredImage = new ImageInfo(HillCipher.FromLongArray(cim.Array.Cast<long>().ToArray()));*/
 
-            //1perutation
-            key = perm1.genKey(k);
-            cypheredImage = new ImageInfo(perm1.Code(originalImage.Image, key));
+            //var keys = hillCipher.GenKey(k);
 
+            //1perutation
+            /*key = perm1.genKey(k);
+            cypheredImage = new ImageInfo(perm1.Code(originalImage.Image, key));*/
+
+
+            //gamma
+            Gamma gamma = new Gamma();
+            gamma.LFSR(0b10001100, "x8 + x4 + x3+x2+ 1");
 
             label1.Text = cypheredImage.H + " " + k;
             pictureBox2.Image = cypheredImage.Image;

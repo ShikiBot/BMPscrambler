@@ -2,38 +2,51 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace BMPscrambler.Classes
 {
     class HillCipher: CypherImage
     {
-        public IDictionary<KeyType, Matrix> GenKey(int len, long abc)
+        public IDictionary<KeyType, Matrix> GenKey(int len)
         {
             Random random = new Random();
-            long[,] key = new long[len, len];
-            for (int i = 0; i < Math.Pow(len, 2); i++)
-                key[i / len, i % len] = Color.FromArgb(random.Next(0, 255), random.Next(0, 255), random.Next(0, 255), random.Next(0, 255)).ToArgb();
-            var keys = new Dictionary<KeyType, Matrix>();            
-            Matrix MEkey = new Matrix(key), MDkey = new Matrix(len, len);
-            long revDet, detK = MEkey.Determinant();
+            long abc = 256;
+                        
+            var keys = new Dictionary<KeyType, Matrix>();
+            Matrix MEkey = new Matrix(len, len), MDkey = new Matrix(len, len);
             bool flag = true;
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
             while (flag)
             {
-                flag = false;                
+                flag = false;
+                MEkey = Keygen(len, random);
+                long revDet, detK = MEkey.Determinant();
                 try { 
                     revDet = Gcd(detK, abc);
                     MDkey = MEkey.InverseByMod(revDet, abc);
                 } catch { flag = true; }                
                 if (!(MEkey * MDkey % abc).IsIdentityMatrix()) flag = true;                 
             }
-            MessageBox.Show((MEkey * MDkey % abc).ToString());
+            stopwatch.Stop();
+            MessageBox.Show(stopwatch.ElapsedMilliseconds + "");
             keys.Add(KeyType.ENCRYPT, MEkey);
             keys.Add(KeyType.DECRYPT, MDkey);
             return keys;
         }
 
-        public Matrix Encrypt(Matrix message, Matrix key, int len, long abc)
+        private Matrix Keygen(int len, Random random)
         {
+            long[,] key = new long[len, len];
+            for (int i = 0; i < Math.Pow(len, 2); i++)
+                key[i / len, i % len] = random.Next(0, 255);
+            return new Matrix(key);
+        }
+
+        public Matrix Encrypt(Matrix message, Matrix key, int len)
+        {
+            long abc = 256;
             int length = message.Length % len == 0 ? message.Length / len : (message.Length + (len - (message.Length % len))) / len;
             for (int i = 0; i < length; i++)
             {
@@ -44,8 +57,9 @@ namespace BMPscrambler.Classes
             return message;
         }
 
-        public Matrix Decrypt(Matrix message, Matrix newKey, int len, long abc)
+        public Matrix Decrypt(Matrix message, Matrix newKey, int len)
         {
+            long abc = 256;
             int length = message.Length % len == 0 ? message.Length / len : (message.Length + (len - (message.Length % len))) / len;
             for (int i = 0; i < length; i++)
             {

@@ -133,17 +133,17 @@ namespace BMPscrambler.Classes
 
             Matrix m = this.Inverse();
 
-            m = m % abc;
-            m = m * revDet;
-            m = m % abc;
+            m %= abc;
+            m *= revDet;
+            m %= abc;
 
-            /*for (int i = 0; i < row; i++)
+            for (int i = 0; i < row; i++)
             {
                 for (int j = 0; j < column; j++)
                 {
                     m.array[i, j] = m.array[i, j] < 0 ? abc + m.array[i, j] : m.array[i, j];
                 }
-            }*/
+            }
             return m.Transpose();
         }
 

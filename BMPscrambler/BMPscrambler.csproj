@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\CypherImage.cs" />
+    <Compile Include="Classes\Gamma.cs" />
     <Compile Include="Classes\gost.cs" />
     <Compile Include="Classes\HillCipher.cs" />
     <Compile Include="Classes\ImageInfo.cs" />
