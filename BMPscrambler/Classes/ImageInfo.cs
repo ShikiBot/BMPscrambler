@@ -3,24 +3,24 @@ using System.Drawing;
 
 namespace BMPscrambler.Classes
 {
-    class ImageInfo
+    class ImageInfo: Palette
     {
         public double H { get; }
         public double Hmax { get; }
         public double Size { get; }
-        public Bitmap Image { get; }
-        public IDictionary<Color, int> counts;
+        public int Width { get; }
+        public int Height { get; }
+        private IDictionary<Color, int> counts;
 
-        public ImageInfo(Bitmap image)
+        public ImageInfo(Bitmap image) : base(image)
         {
-            Image = image;
             Size = image.Width * image.Height;
             ColorCount();
             Hmax = GetHmax();
-            H = GetH();            
+            H = GetH();
+            Width = image.Width;
+            Height = image.Height;
         }
-
-        ~ImageInfo() { }
 
         private double GetHmax()
         {

@@ -1,33 +1,47 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BMPscrambler.Classes
 {
-    class SinglePermutation 
+    class SinglePermutation<T> : Symmetric<T>
     {
-        public Bitmap Code(Bitmap image, int[] key)
+        public SinglePermutation(Bitmap bitmap, T key) : base(bitmap, key)
         {
-            Bitmap Cimage = new Bitmap(image);
-            for (int i = 0; i < image.Width * image.Height / key.Length; i++)
-                for (int j = 0; j < key.Length; j++)
-                    Cimage.SetPixel((i*key.Length + j) / Cimage.Width, (i * key.Length + j) % Cimage.Width, image.GetPixel((i * key.Length + key[j]) / image.Width, (i * key.Length + key[j]) % image.Width));
-            return Cimage;
+
         }
 
-        public Bitmap Decode(Bitmap image, int[] key)
+        public SinglePermutation<int[]> Encrypt()
         {
-            Bitmap Cimage = new Bitmap(image);
-            for (int i = 0; i < image.Width * image.Height / key.Length; i++)
-                for (int j = 0; j < key.Length; j++)
-                    Cimage.SetPixel((i * key.Length + key[j]) / image.Width, (i * key.Length + key[j]) % image.Width, image.GetPixel((i * key.Length + j) / Cimage.Width, (i * key.Length + j) % Cimage.Width));
-            return Cimage;
+            Bitmap Cimage = new Bitmap(ImageInfo.Image);
+            for (int i = 0; i < ImageInfo.Width * ImageInfo.Height / (Key as int[]).Length; i++)
+                for (int j = 0; j < (Key as int[]).Length; j++)
+                {
+                    int x = (i * (Key as int[]).Length + (Key as int[])[j]) / ImageInfo.Width;
+                    int y = (i * (Key as int[]).Length + (Key as int[])[j]) % ImageInfo.Width;
+                    int newx = (i * (Key as int[]).Length + j) / Cimage.Width;
+                    int newy = (i * (Key as int[]).Length + j) % Cimage.Width;
+                    Cimage.SetPixel(newx, newy, ImageInfo.Image.GetPixel(x, y));
+                }
+            return new SinglePermutation<int[]>(Cimage, Key as int[]);
         }
 
-        public int[] GenKey(int count)
+        public SinglePermutation<int[]> Decrypt()
+        {
+            Bitmap image = new Bitmap(ImageInfo.Image);
+            for (int i = 0; i < image.Width * image.Height / (Key as int[]).Length; i++)
+                for (int j = 0; j < (Key as int[]).Length; j++)
+                {
+                    int x = (i * (Key as int[]).Length + j) / ImageInfo.Width;
+                    int y = (i * (Key as int[]).Length + j) % ImageInfo.Width;
+                    int newx = (i * (Key as int[]).Length + (Key as int[])[j]) / image.Width;
+                    int newy = (i * (Key as int[]).Length + (Key as int[])[j]) % image.Width;
+                    image.SetPixel(newx, newy, ImageInfo.Image.GetPixel(x, y));
+
+                }
+            return new SinglePermutation<int[]>(image, Key as int[]); ;
+        }
+
+        public static int[] GenKey(int count)
         {
             int[] key = new int[count];
             for (int i = 0; i < count; i++)
@@ -36,7 +50,7 @@ namespace BMPscrambler.Classes
             return key;
         }
 
-        private int[] Shuffle(int[] array)
+        private static int[] Shuffle(int[] array)
         {
             Random rng = new Random();
             int n = array.Length;

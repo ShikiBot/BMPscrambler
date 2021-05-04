@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BMPscrambler.Classes.Crypto">
+    <Position X="5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Classes\Crypto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BMPscrambler.Classes.Asymmetric&lt;T&gt;">
+    <Position X="7" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Asymmetric.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BMPscrambler.Classes.HillCipher&lt;T&gt;">
+    <Position X="8.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAIAAAAAACAAAAQAAAAAAQAAAAAAAAAAAAAIAQAAAA=</HashCode>
+      <FileName>Classes\HillCipher.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BMPscrambler.Classes.Symmetric&lt;T&gt;">
+    <Position X="7" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Symmetric.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BMPscrambler.Classes.SinglePermutation&lt;T&gt;">
+    <Position X="10.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAQAAAAAAQAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Classes\SinglePermutation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BMPscrambler.Classes.Gamma&lt;T&gt;">
+    <Position X="10.5" Y="2.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="BMPscrambler.Classes.Gamma&lt;T&gt;.Byte">
+        <TypeIdentifier>
+          <NewMemberFileName>Classes\Gamma.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAIAAEAAA=</HashCode>
+      <FileName>Classes\Gamma.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BMPscrambler.Classes.ImageInfo">
+    <Position X="3" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAgABAAAgAAABAAAAEAAAAAAIAAAAABAAEAAAAA=</HashCode>
+      <FileName>Classes\ImageInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BMPscrambler.Classes.Matrix">
+    <Position X="12.25" Y="1" Width="2" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAACAAAIEpJAKBCQAAAAiAAIIgAIAwAACA=</HashCode>
+      <FileName>Classes\Matrix.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BMPscrambler.Classes.Palette">
+    <Position X="0.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAQAAAAEAAAAAAAAAEACAABACAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Palette.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="BMPscrambler.Classes.KeyType">
+    <Position X="7" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>Classes\KeyType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
