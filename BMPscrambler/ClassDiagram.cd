@@ -40,15 +40,8 @@
     <Compartments>
       <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
-    <NestedTypes>
-      <Enum Name="BMPscrambler.Classes.Gamma&lt;T&gt;.Byte">
-        <TypeIdentifier>
-          <NewMemberFileName>Classes\Gamma.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Enum>
-    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AQAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAIAAEAAA=</HashCode>
+      <HashCode>AQAAAAAAAACAAAAQAAAAAABAAAAAAAAAAAAAIAAEAAA=</HashCode>
       <FileName>Classes\Gamma.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -62,7 +55,7 @@
   <Class Name="BMPscrambler.Classes.Matrix">
     <Position X="12.25" Y="1" Width="2" />
     <TypeIdentifier>
-      <HashCode>QAAAAAAAAAAACAAAIEpJAKBCQAAAAiAAIIgAIAwAACA=</HashCode>
+      <HashCode>QAAAAAAAAAAACAAAIEpJAIBCQAAAAiAAIIAAIAwAACA=</HashCode>
       <FileName>Classes\Matrix.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -74,7 +67,7 @@
     </TypeIdentifier>
   </Class>
   <Enum Name="BMPscrambler.Classes.KeyType">
-    <Position X="7" Y="0.5" Width="1.5" />
+    <Position X="1.75" Y="6.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
       <FileName>Classes\KeyType.cs</FileName>

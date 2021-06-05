@@ -35,12 +35,6 @@ namespace BMPscrambler.Classes
         public HillCipher<Matrix> Decrypt()
         {
             int len = (PrivateKey as Matrix).Column;
-            if (len == 11)
-            {
-                return new HillCipher<Matrix>(Properties.Resources.GokuSSBlue,
-                                       PublicKey as Matrix,
-                                       PrivateKey as Matrix);
-            }
             int length = Message.Length % len == 0 ? Message.Length / len : (Message.Length - Message.Length % len) / len;
             for (int i = 0; i < length; i++)
             {
@@ -95,9 +89,7 @@ namespace BMPscrambler.Classes
         {
             Random random = new Random();
             var keys = new Dictionary<KeyType, Matrix>();
-            Matrix MEkey = new Matrix(len, len), MDkey = new Matrix(len, len);            
-            MEkey = Keygen(len, random);
-            MDkey = Keygen(len, random);
+            Matrix MEkey = Keygen(len, random), MDkey = Keygen(len, random);
             keys.Add(KeyType.ENCRYPT, MEkey);
             keys.Add(KeyType.DECRYPT, MDkey);
             return keys;

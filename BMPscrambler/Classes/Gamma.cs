@@ -5,68 +5,49 @@ namespace BMPscrambler.Classes
 {
     class Gamma<T> : Symmetric<T>
     {
-        private int[] Message { get; }
-        private enum Byte
-        {
-            Digit0 = 1,
-            Digit1 = 1 << 1,
-            Digit2 = 1 << 2,
-            Digit3 = 1 << 3,
-            Digit4 = 1 << 4,
-            Digit5 = 1 << 5,
-            Digit6 = 1 << 6,
-            Digit7 = 1 << 7,
-            Digit8 = 1 << 8
-        }
+        private const int abc = 256;
+        public int[] Message { get; set; }
+        private int Length { get; }
 
-        public Gamma(Bitmap bitmap, T key) : base(bitmap, key)
+        public Gamma(Bitmap bitmap, T key, int length) : base(bitmap, key)
         {
             Message = ImageInfo.ToInt32Array();
+            Length = length;
         }
 
         public Gamma<int> Encrypt()
         {
-            int key = LFSR(Convert.ToInt32(Key), "x8+x4+x3+x2+1");
+            int[] key = LFSR(Convert.ToInt32(Key), Length);
             for (int i = 0; i < Message.Length; i++)
-            {
-                Message[i] = (Message[i] + key) % 256;
-                key = LFSR(key, "x8+x4+x3+x2+1");
-            }
-            return new Gamma<int>(ImageInfo.ToImage(Message), key);
+                Message[i] = (((Message[i] + key[i % key.Length]) % abc) + abc) % abc;
+            return new Gamma<int>(ImageInfo.ToImage(Message), Convert.ToInt32(Key), Length);
         }
 
         public Gamma<int> Decrypt()
         {
-            int key = LFSR(Convert.ToInt32(Key), "x8+x4+x3+x2+1");
-            for (int i = 0; i < Message.Length; i++)
-            {
-                Message[i] = (Message[i] + 256 - key) % 256;
-                key = LFSR(key, "x8+x4+x3+x2+1");
-            }
-            return new Gamma<int>(ImageInfo.ToImage(Message), key);
+            int[] key = LFSR(Convert.ToInt32(Key), Length);
+            for (int i = 0; i < Message.Length; i++)          
+                Message[i] = (((Message[i] + abc - key[i % key.Length]) % abc) +abc) % abc;
+            return new Gamma<int>(ImageInfo.ToImage(Message), Convert.ToInt32(Key), Length);
         }        
 
-        public int LFSR(int seed, string formula)
+        private int LFSR(int seed)
         {
-            formula = formula.Replace(" ", "");
-            string[] frml = formula.ToLower().Split('+');
-            int length = Convert.ToInt32(frml[0].Remove(0,1));
-            while (seed > Math.Pow(2, length)) seed >>= 1;
-            int bn = seed & (1 << Convert.ToInt32(frml[1].Remove(0, 1))) >> Convert.ToInt32(frml[1].Remove(0, 1));
-            
-            for (int i = 2; i < frml.Length; i++)
-                switch (frml[i])
-                {                    
-                    case "x8": bn ^= (seed & (int)Byte.Digit8) >> 8; break;
-                    case "x7": bn ^= (seed & (int)Byte.Digit7) >> 7; break;
-                    case "x6": bn ^= (seed & (int)Byte.Digit6) >> 6; break;
-                    case "x5": bn ^= (seed & (int)Byte.Digit5) >> 5; break;
-                    case "x4": bn ^= (seed & (int)Byte.Digit4) >> 4; break;
-                    case "x3": bn ^= (seed & (int)Byte.Digit3) >> 3; break;
-                    case "x2": bn ^= (seed & (int)Byte.Digit2) >> 2; break;
-                    case "1": bn ^= seed & (int)Byte.Digit1; break;
-                }                          
-            return (bn << length) | (seed >> 1);
+            int b0 = (seed & 0b00000001);
+            int b2 = (seed & 0b00000100) >> 2;
+            int b3 = (seed & 0b00001000) >> 3;
+            int b4 = (seed & 0b00010000) >> 4;
+            int b7 = b4 ^ b3 ^ b2 ^ b0;
+            return (b7 << 8) | (seed >> 1);
+        }
+
+        private int[] LFSR(int seed, int len)
+        {
+            int[] array = new int[len];
+            array[0] = seed;
+            for (int i = 1; i < len; i++)
+                array[i] = LFSR(array[i-1]);
+            return array;
         }
     }
 }

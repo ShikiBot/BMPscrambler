@@ -14,17 +14,17 @@ namespace BMPscrambler.Classes
 
         public ImageInfo(Bitmap image) : base(image)
         {
-            Size = image.Width * image.Height;
-            ColorCount();
-            Hmax = GetHmax();
-            H = GetH();
             Width = image.Width;
             Height = image.Height;
+            Size = Width * Height;
+            ColorCount();
+            Hmax = System.Math.Round(GetHmax(), 3);
+            H = System.Math.Round(GetH(), 3);            
         }
 
         private double GetHmax()
         {
-            return System.Math.Log(Image.Width * Image.Height, 2);
+            return System.Math.Log(Size, 2);
         }
 
         private double GetH()

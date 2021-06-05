@@ -29,17 +29,6 @@ namespace BMPscrambler.Classes
             array = matrix;
         }
 
-        public Matrix(int[] matrix, int column)
-        {
-            row = matrix.Length % column == 0 ? matrix.Length / column : (matrix.Length + (column - matrix.Length % column)) / column;
-
-            this.column = column;
-            length = matrix.Length;
-            array = new int[row, column];
-            for (int i = 0; i < length; i++)
-                array[i / column, i % column] = matrix[i];
-        }
-
         public bool IsIdentityMatrix()
         {
             if (array == null || column != row) return false;
@@ -56,15 +45,6 @@ namespace BMPscrambler.Classes
             for (int i = 0; i < Column; i++)
                 for (int j = 0; j < Row; j++)
                     ret[i * Column + j] = Array[i, j];
-            return ret;
-        }
-
-        public int[,] ToInt()
-        {
-            int[,] ret = new int[Column, Row];
-            for (int i = 0; i < Column; i++)
-                for (int j = 0; j < Row; j++)
-                    ret[i, j] = (int)Array[i, j];
             return ret;
         }
 
