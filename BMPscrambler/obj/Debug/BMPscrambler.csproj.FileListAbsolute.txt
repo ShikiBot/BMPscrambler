@@ -16,7 +16,6 @@ D:\projects\BMPscrambler\BMPscrambler\bin\Debug\BMPscrambler.exe
 D:\projects\BMPscrambler\BMPscrambler\bin\Debug\BMPscrambler.pdb
 D:\projects\BMPscrambler\BMPscrambler\bin\Debug\Newtonsoft.Json.dll
 D:\projects\BMPscrambler\BMPscrambler\bin\Debug\Newtonsoft.Json.xml
-D:\projects\BMPscrambler\BMPscrambler\obj\Debug\BMPscrambler.csprojAssemblyReference.cache
 D:\projects\BMPscrambler\BMPscrambler\obj\Debug\BMPscrambler.Form1.resources
 D:\projects\BMPscrambler\BMPscrambler\obj\Debug\BMPscrambler.Properties.Resources.resources
 D:\projects\BMPscrambler\BMPscrambler\obj\Debug\BMPscrambler.csproj.GenerateResource.cache
@@ -24,3 +23,4 @@ D:\projects\BMPscrambler\BMPscrambler\obj\Debug\BMPscrambler.csproj.CoreCompileI
 D:\projects\BMPscrambler\BMPscrambler\obj\Debug\BMPscrambler.csproj.CopyComplete
 D:\projects\BMPscrambler\BMPscrambler\obj\Debug\BMPscrambler.exe
 D:\projects\BMPscrambler\BMPscrambler\obj\Debug\BMPscrambler.pdb
+D:\projects\BMPscrambler\BMPscrambler\obj\Debug\BMPscrambler.csproj.AssemblyReference.cache

@@ -57,7 +57,10 @@ namespace BMPscrambler
                         HillCipher<Matrix>.GenNewKey(k)[KeyType.DECRYPT]);
                     btnd.Enabled = false;
                 }
+                var tmp = hillCipher.Message;
                 hillCipher = hillCipher.Encrypt();
+                hillCipher.Message = tmp;
+
                 cypheredImage = hillCipher.ImageInfo;
             }
             else if (radioPermut.Checked) //1perutation
@@ -73,7 +76,9 @@ namespace BMPscrambler
                 lastRB = radioGamm;
                 gamma = new Gamma<int>(cypheredImage.Image, 
                     random.Next(0, 256), k);
+                var tmp = gamma.Message;
                 gamma = gamma.Encrypt();
+                gamma.Message = tmp;
                 cypheredImage = gamma.ImageInfo;
             }
             else SystemSounds.Exclamation.Play();
