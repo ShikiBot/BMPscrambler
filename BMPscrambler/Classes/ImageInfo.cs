@@ -24,7 +24,7 @@ namespace BMPscrambler.Classes
 
         private double GetHmax()
         {
-            return System.Math.Log(Size, 2);
+            return System.Math.Log(CPalette.Entries.Length, 2);
         }
 
         private double GetH()

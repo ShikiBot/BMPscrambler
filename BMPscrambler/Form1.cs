@@ -109,32 +109,32 @@ namespace BMPscrambler
 
         private void Btnmin1_Click(object sender, EventArgs e)
         {
-            k = k > 2 ? k -= 1 : k;
+            k = k > 2 ? k -= 1 : 2;
             keyLen.Text = "Длинна ключа: " + k;
         }
         private void Btnmin10_Click(object sender, EventArgs e)
         {
-            k = k > 12 ? k -= 10 : k;
+            k = k > 12 ? k -= 10 : 2;
             keyLen.Text = "Длинна ключа: " + k;
         }        
         private void Btnmin100_Click(object sender, EventArgs e)
         {
-            k = k > 102 ? k -= 100 : k;
+            k = k > 102 ? k -= 100 : 2;
             keyLen.Text = "Длинна ключа: " + k;
         }
         private void Btnplus1_Click(object sender, EventArgs e)
         {
-            k += 1;
+            k = k < 9999 ? k += 1 : 10000;
             keyLen.Text = "Длинна ключа: " + k;
         }
         private void Btnplus10_Click(object sender, EventArgs e)
         {
-            k += 10;
+            k = k < 9990 ? k += 10 : 10000;
             keyLen.Text = "Длинна ключа: " + k;
         }
         private void Btnplus100_Click(object sender, EventArgs e)
         {
-            k += 100;
+            k = k < 9900 ? k += 100 : 10000;
             keyLen.Text = "Длинна ключа: " + k;
 
         }
